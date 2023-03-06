@@ -1,12 +1,13 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import finnHub from "../apis/finnHub"; // finnHubb component is used to actually make fetch call to the finnHub baseURL
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
+import { WatchListContext } from "../context/watchListContext";
 
 const StockList = () => {
-  // create state variable used to keep track of stocks we'd like to watch (stock list)
-  const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"]);
   // state variable to set fetched response data
   const [stock, setStock] = useState([]);
+
+  const { watchList } = useContext(WatchListContext);
 
   // function to determine text color depending on value (neg=red, pos=green)
   const changeColor = (change) => {
@@ -50,7 +51,7 @@ const StockList = () => {
     fetchData();
 
     return () => (isMounted = false); // this return function runs whenever a component is unmounted
-  }, []);
+  }, [watchList]);
 
   return (
     <div>
