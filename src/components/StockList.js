@@ -1,4 +1,5 @@
 import { React, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import finnHub from "../apis/finnHub"; // finnHubb component is used to actually make fetch call to the finnHub baseURL
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { WatchListContext } from "../context/watchListContext";
@@ -8,6 +9,8 @@ const StockList = () => {
   const [stock, setStock] = useState([]);
 
   const { watchList } = useContext(WatchListContext);
+
+  const navigate = useNavigate();
 
   // function to determine text color depending on value (neg=red, pos=green)
   const changeColor = (change) => {
@@ -53,6 +56,10 @@ const StockList = () => {
     return () => (isMounted = false); // this return function runs whenever a component is unmounted
   }, [watchList]);
 
+  const handleStockSelect = (symbol) => {
+    navigate(`detail/${symbol}`);
+  };
+
   return (
     <div>
       <table className="table hover mt-5">
@@ -71,7 +78,12 @@ const StockList = () => {
         <tbody>
           {stock.map((stockData) => {
             return (
-              <tr className="table-row" kay={stockData.symbol}>
+              <tr
+                className="table-row"
+                key={stockData.symbol}
+                style={{ cursor: "pointer" }}
+                onClick={() => handleStockSelect(stockData.symbol)}
+              >
                 <th scope="row">{stockData.symbol}</th>
                 <td>{stockData.data.c}</td>
                 <td className={`text-${changeColor(stockData.data.d)}`}>
