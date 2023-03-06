@@ -1,11 +1,22 @@
 import { React, useState, useEffect } from "react";
 import finnHub from "../apis/finnHub"; // finnHubb component is used to actually make fetch call to the finnHub baseURL
+import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 
 const StockList = () => {
   // create state variable used to keep track of stocks we'd like to watch (stock list)
   const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"]);
   // state variable to set fetched response data
   const [stock, setStock] = useState([]);
+
+  // function to determine text color depending on value (neg=red, pos=green)
+  const changeColor = (change) => {
+    return change > 0 ? "success" : "danger";
+  };
+
+  // function to determine icon color depending on value (neg=red, pos=green)
+  const renderIcon = (change) => {
+    return change > 0 ? <BsFillCaretUpFill /> : <BsFillCaretDownFill />;
+  };
 
   // use useEffect to fetch data on mount
   useEffect(() => {
@@ -62,8 +73,12 @@ const StockList = () => {
               <tr className="table-row" kay={stockData.symbol}>
                 <th scope="row">{stockData.symbol}</th>
                 <td>{stockData.data.c}</td>
-                <td>{stockData.data.d}</td>
-                <td>{stockData.data.dp}</td>
+                <td className={`text-${changeColor(stockData.data.d)}`}>
+                  {stockData.data.d} {renderIcon(stockData.data.d)}
+                </td>
+                <td className={`text-${changeColor(stockData.data.dp)}`}>
+                  {stockData.data.dp} {renderIcon(stockData.data.dp)}
+                </td>
                 <td>{stockData.data.h}</td>
                 <td>{stockData.data.l}</td>
                 <td>{stockData.data.o}</td>
