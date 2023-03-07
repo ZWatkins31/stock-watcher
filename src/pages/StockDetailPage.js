@@ -1,9 +1,22 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import finnHub from "../apis/finnHub";
+import { StockChart } from "../components/StockChart";
 
 const StockDetailPage = () => {
   const { symbol } = useParams();
+
+  const [chartData, setChartData] = useState();
+
+  const formateData = (data) => {
+    return data.t.map((element, index) => {
+      const roundedNum = data.c[index].toFixed(2);
+      return {
+        x: element * 1000, // this is the timestamp
+        y: roundedNum,
+      };
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,19 +63,48 @@ const StockDetailPage = () => {
           }),
         ]);
         console.log(responses);
+
+        setChartData({
+          day: formateData(responses[0].data),
+          week: formateData(responses[1].data),
+          year: formateData(responses[2].data),
+        });
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
+  }, [symbol]);
 
   return (
     <div>
-      StockDetailPage
-      <div>{symbol}</div>
+      {/*if chart data exists, then render StockChart component */}
+      {chartData && (
+        <div>
+          <StockChart chartData={chartData} symbol={symbol} />
+        </div>
+      )}
     </div>
   );
 };
 
 export default StockDetailPage;
+
+/*
+// How data should be organized:
+
+const chartData = {
+  day: "data for one day"
+  week: "data for one week"
+  year: "data for one year"
+}
+
+// Data should be an array of objects
+const data = [
+  {x: "data", y: "data"},
+  {x: "data", y: "data"},
+  {x: "data", y: "data"},
+  ...
+]
+
+*/
