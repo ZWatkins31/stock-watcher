@@ -8,7 +8,7 @@ const StockList = () => {
   // state variable to set fetched response data
   const [stock, setStock] = useState([]);
 
-  const { watchList } = useContext(WatchListContext);
+  const { watchList, deleteStock } = useContext(WatchListContext);
 
   const navigate = useNavigate();
 
@@ -95,7 +95,18 @@ const StockList = () => {
                 <td>{stockData.data.h}</td>
                 <td>{stockData.data.l}</td>
                 <td>{stockData.data.o}</td>
-                <td>{stockData.data.pc}</td>
+                <td>
+                  {stockData.data.pc}{" "}
+                  <button
+                    className="btn btn-danger btn-sm ml-3 d-inline-block delete-button"
+                    onClick={(e) => {
+                      e.stopPropagation(); // this (stopPropogation) prevents the event from bubbling up and initiating the navigation to the stock detail page
+                      deleteStock(stockData.symbol);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </td>
               </tr>
             );
           })}
