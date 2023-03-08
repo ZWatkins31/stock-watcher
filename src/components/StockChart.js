@@ -6,10 +6,46 @@ export const StockChart = ({ chartData, symbol }) => {
 
   const [dateType, setDateType] = useState("24h");
 
-  const color = [];
+  // Function to swtich between date types/format (day, month, year)
+  const determineTimeFormate = () => {
+    switch (dateType) {
+      case "24h":
+        return day;
+      case "7d":
+        return week;
+      case "1y":
+        return year;
+      default:
+        return day;
+    }
+  };
+
+  const series = [
+    {
+      name: symbol,
+      data: determineTimeFormate(),
+    },
+  ];
+
+  // variable used to determine the color of the graph => "last y vairable" - "first y variable"
+  const color =
+    determineTimeFormate()[determineTimeFormate().length - 1].y -
+      determineTimeFormate()[0].y >
+    0
+      ? "#26c281"
+      : "#ed3419";
+
+  const renderButtonSelect = (button) => {
+    const classes = "btn m-1";
+    if (button === dateType) {
+      return classes + " btn-primary";
+    } else {
+      return classes + " btn-outline-primary";
+    }
+  };
 
   const options = {
-    // colors: []
+    colors: [color],
     title: {
       text: symbol,
       align: "center",
@@ -38,35 +74,6 @@ export const StockChart = ({ chartData, symbol }) => {
         formatter: undefined,
       },
     },
-  };
-
-  const determineTimeFormate = () => {
-    switch (dateType) {
-      case "24h":
-        return day;
-      case "7d":
-        return week;
-      case "1y":
-        return year;
-      default:
-        return day;
-    }
-  };
-
-  const series = [
-    {
-      name: symbol,
-      data: determineTimeFormate(),
-    },
-  ];
-
-  const renderButtonSelect = (button) => {
-    const classes = "btn m-1";
-    if (button === dateType) {
-      return classes + " btn-primary";
-    } else {
-      return classes + " btn-outline-primary";
-    }
   };
 
   return (
