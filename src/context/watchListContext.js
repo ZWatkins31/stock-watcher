@@ -1,10 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const WatchListContext = createContext();
 
 export const WatchListContextProvider = (props) => {
   // create state variable used to keep track of stocks we'd like to watch (stock list)
-  const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"]);
+  // first check local storage to see if stocks have been saved. If no stocks saved, default to googl, msft, amzn
+  const [watchList, setWatchList] = useState(
+    localStorage.getItem("watchList")?.split(",") || ["GOOGL", "MSFT", "AMZN"]
+  );
+
+  // useEffect hook to store stocks (ie StockList stocks)
+  useEffect(() => {
+    localStorage.setItem("watchList", watchList);
+  }, [watchList]);
 
   const addStock = (stock) => {
     if (watchList.indexOf(stock) === -1) {
