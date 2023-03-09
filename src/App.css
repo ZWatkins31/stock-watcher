@@ -1,3 +1,31 @@
+/******************  Custom Fonts ******************/
+
+@font-face {
+    font-family: 'Anton-Regular';
+    src: url('./assets/fonts/Anton-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('./assets/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-Italic';
+    src: url('./assets/fonts/Roboto-Italic.ttf');
+}
+
+/* .overview-pg {
+    background-color: red;
+} */
+
+.title {
+    font-family: Anton-Regular;
+    font-size: 56px;
+    margin-top: 20px;
+    text-align: center;
+}
+
 .delete-button {
     visibility: hidden;
     display: inline-block;
