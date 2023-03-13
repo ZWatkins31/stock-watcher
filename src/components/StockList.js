@@ -47,7 +47,7 @@ const StockList = () => {
         // console.log(data);
         if (isMounted) {
           setStock(data);
-          // console.log(stock);
+          console.log(stock);
         }
       } catch (err) {}
     };

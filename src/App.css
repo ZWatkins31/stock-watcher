@@ -15,15 +15,25 @@
     src: url('./assets/fonts/Roboto-Italic.ttf');
 }
 
-/* .overview-pg {
-    background-color: red;
-} */
+.App {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    background-image: radial-gradient(at top, #14a09e, #0a305b);
+    padding-top: 20px;
+    z-index: -1;
+    align-content: center;
+}
 
 .title {
     font-family: Anton-Regular;
-    font-size: 56px;
-    margin-top: 20px;
+    font-size: 65px;
+    /* margin-top: 20px; */
     text-align: center;
+    letter-spacing: 10px;
+    background-image: linear-gradient(135deg,#00cdac, #7effe3);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .delete-button {
@@ -34,3 +44,16 @@
 .table-row:hover .delete-button {
     visibility: visible;
 }
+
+.hero-image {
+	max-height: 100%;
+	max-width: 400px;
+    height: auto;
+    width: auto;
+	background-size: cover;
+    display: inline-block;
+}
+.hide-bg{
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+  }
