@@ -62,6 +62,76 @@ const StockList = () => {
 
   return (
     <div>
+      {stock.map((stockData) => {
+        return (
+          <div
+            className="stock-card mx-1 my-3 px-2 py-2"
+            key={stockData.symbol}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleStockSelect(stockData.symbol)}
+          >
+            <div className="stock-card-data">
+              <h5>{stockData.symbol}</h5>
+            </div>
+            <div className="stock-card-data">
+              <h6>Last: </h6>
+              {stockData.data.c}
+            </div>
+            <div
+              className={`text-${changeColor(
+                stockData.data.d
+              )} stock-card-data`}
+            >
+              <h6>Chg: </h6>
+              {stockData.data.d} {renderIcon(stockData.data.d)}
+            </div>
+            <div
+              className={`text-${changeColor(
+                stockData.data.d
+              )} stock-card-data`}
+            >
+              <h6>Chg%: </h6>
+              {stockData.data.dp} {renderIcon(stockData.data.dp)}
+            </div>
+
+            <div className="stock-card-data">
+              <h6>High: </h6>
+              {stockData.data.h}
+            </div>
+            <div className="stock-card-data">
+              <h6>Low: </h6>
+              {stockData.data.l}
+            </div>
+            <div className="stock-card-data">
+              <h6>Open: </h6>
+              {stockData.data.o}
+            </div>
+            <div className="stock-card-data">
+              <h6>Pclose: </h6>
+              {stockData.data.pc}{" "}
+            </div>
+            <div>
+              <button
+                className="btn btn-danger btn-sm ml-3 d-inline-block delete-button"
+                onClick={(e) => {
+                  e.stopPropagation(); // this (stopPropogation) prevents the event from bubbling up and initiating the navigation to the stock detail page
+                  deleteStock(stockData.symbol);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default StockList;
+
+/*
+    <div>
       <table className="table hover mt-5">
         <thead style={{ color: "rgb(79,89,102)" }}>
           <tr>
@@ -113,7 +183,6 @@ const StockList = () => {
         </tbody>
       </table>
     </div>
-  );
-};
 
-export default StockList;
+
+*/
