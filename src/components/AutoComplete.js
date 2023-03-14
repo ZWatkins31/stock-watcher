@@ -62,10 +62,10 @@ const AutoComplete = () => {
   }, [search]);
 
   return (
-    <div className="w-50 p-5 rounded mx-auto">
+    <div className="w-50 p-5 rounded mx-auto auto-complete">
       <div className="form-floating dropdown">
         <input
-          style={{ backgroundColor: "rgba(145, 158, 171, 0.04)" }}
+          style={{ backgroundColor: "#22354b", color: "white" }}
           id="search"
           type="text"
           className="form-control"

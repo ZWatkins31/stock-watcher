@@ -6,8 +6,7 @@ import bull from "../assets/images/bull.png";
 const StockOverviewPage = () => {
   return (
     <div>
-      <h1 className="title">Stock Watcher</h1>
-      <img className="hero-image hide-bg" src={bull} />
+      <h1 className="title">STOCK WATCHER</h1>
       <AutoComplete />
       <StockList />
     </div>
