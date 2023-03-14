@@ -15,6 +15,14 @@
     src: url('./assets/fonts/Roboto-Italic.ttf');
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('./assets/fonts/Poppins-Regular.ttf');
+  }
+
+
+
+
 .App {
     min-height: 100vh;
     height: auto;
@@ -25,7 +33,7 @@
 }
 
 .title {
-    font-family: Roboto-Regular;
+    font-family: Poppins;
     font-size: 65px;
     margin-top: 20px;
     text-align: center;
@@ -44,16 +52,6 @@
     visibility: visible;
 }
 
-.hero-image {
-    background-color: red;
-    min-height: 5em;
-}
-
-.hide-bg {
-    mix-blend-mode: multiply;
-    filter: contrast(1);
-}
-
 .stock-card {
     background-color: #22354b;
     display: flex;
@@ -61,20 +59,34 @@
     align-items: center;
     color: white;
     border-radius: 10px;
-    border-color: #ffaf7e;
-    border-width: 4px;
     min-width: 900px;
     height: 80px;
+    font-family: Poppins;
 }
 
 .stock-card-data {
     align-content: center;
     /* background-color: #a97eff; */
-    width: 80px;
+    width: 90px;
+    text-align: center;
+}
+
+.ticker {
+    letter-spacing: 0.5px;
+    color:#1969ea;
 }
 
 .auto-complete {
     color: #19eaca;
+    border-color: #d1361a;
 }
+
+.stock-card-data h6 {
+    color: #518ded;
+    letter-spacing: 0.75px;
+    text-decoration: underline;
+}
+
+
 
 

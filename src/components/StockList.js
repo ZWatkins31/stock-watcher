@@ -14,7 +14,7 @@ const StockList = () => {
 
   // function to determine text color depending on value (neg=red, pos=green)
   const changeColor = (change) => {
-    return change > 0 ? "success" : "danger";
+    return change > 0 ? "#0ac68a" : "#d1361a";
   };
 
   // function to determine icon color depending on value (neg=red, pos=green)
@@ -70,7 +70,7 @@ const StockList = () => {
             style={{ cursor: "pointer" }}
             onClick={() => handleStockSelect(stockData.symbol)}
           >
-            <div className="stock-card-data">
+            <div className="stock-card-data ticker">
               <h5>{stockData.symbol}</h5>
             </div>
             <div className="stock-card-data">
@@ -78,17 +78,15 @@ const StockList = () => {
               {stockData.data.c}
             </div>
             <div
-              className={`text-${changeColor(
-                stockData.data.d
-              )} stock-card-data`}
+              className="stock-card-data"
+              style={{ color: `${changeColor(stockData.data.d)}` }}
             >
               <h6>Chg: </h6>
               {stockData.data.d} {renderIcon(stockData.data.d)}
             </div>
             <div
-              className={`text-${changeColor(
-                stockData.data.d
-              )} stock-card-data`}
+              className="stock-card-data"
+              style={{ color: `${changeColor(stockData.data.dp)}` }}
             >
               <h6>Chg%: </h6>
               {stockData.data.dp} {renderIcon(stockData.data.dp)}
